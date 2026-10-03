@@ -510,3 +510,9 @@ CHANGES AFTER THE FIRST REVIEW
   Pages serves files as-is). Waiting on: the user creates the GitHub repo (no gh CLI
   on this machine), then push, enable Pages (main / root), then generate the QR in
   tools/qr.html against https://webjohn7.github.io/<repo>/ and scan it with a phone.
+  Update: pushed to https://github.com/WebJohn7/Menu-saunaasia (public). Live URL
+  will be https://webjohn7.github.io/Menu-saunaasia/ once Pages is enabled
+  (Settings -> Pages -> Deploy from branch, main, / root).
+  QR generated: qr/menu-qr.png (1200px) and qr/menu-qr.svg (vector, for print),
+  error correction M, 4-module quiet zone. Decoded back with jsQR -> URL matches.
+  Still to do: enable Pages, scan with a real phone on mobile data, print.
