@@ -1,0 +1,465 @@
+{
+  "restaurant": {
+    "name": "Restaurace Sauna Asia",
+    "tagline": "Vietnamská · thajská · japonská kuchyně",
+    "address": "Tyršova 287, Bělá pod Bezdězem",
+    "phone": "608 099 881",
+    "currency": "kč",
+    "_note": "name, address and phone are real (client, 2026-09-17). hours removed at client request (2026-10-03) — re-add the key to show it in the header again. tagline is still PLACEHOLDER text from the design system — confirm it before printing QR codes."
+  },
+
+  "ui": {
+    "searchPlaceholder": "Hledat jídlo nebo číslo…",
+    "filters": { "noMeat": "Bez masa", "spicy": "Pikantní" },
+    "indexTitle": "Jídelní lístek",
+    "backLabel": "Zpět",
+    "allergenNav": "Alergeny",
+    "allergenTitle": "Seznam alergenů",
+    "allergenNote": "Čísla u názvů jídel odpovídají směrnici 1169/2011 EU.",
+    "priceFrom": "od",
+    "emptyTitle": "Nic jsme nenašli",
+    "emptyBody": "Zkuste jiné slovo nebo číslo jídla.",
+    "errorTitle": "Menu se nepodařilo načíst",
+    "errorBody": "Zkuste stránku načíst znovu.",
+    "badgeSpicy": "Pikantní",
+    "badgeVege": "Vege",
+    "resultsOne": "jídlo",
+    "resultsFew": "jídla",
+    "resultsMany": "jídel"
+  },
+
+  "categories": [
+    {
+      "id": "predkrmy",
+      "name": "Předkrmy",
+      "blurb": "Závitky, krevety a dim sum na začátek.",
+      "items": [
+        {
+          "number": "1",
+          "name": "Fresh Roll 2ks",
+          "description": "Čerstvé závitky, rýžové nudle, ledový salát, mango, okurka, mrkev, bylinky, chia, sladko-kyselá omáčka.",
+          "image": "fresh-roll",
+          "allergens": [4],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s krevetami", "price": 70 },
+            { "label": "s hovězím masem", "price": 70 },
+            { "label": "s tofu", "price": 60, "noMeat": true }
+          ]
+        },
+        {
+          "number": "2",
+          "name": "Spring Rolls 6ks",
+          "description": "Jarní závitky, skleněné nudle, mrkev, zelí, kurkuma, relish omáčka – sójová omáčka",
+          "image": "spring-rolls",
+          "allergens": [1, 6],
+          "price": 60
+        },
+        {
+          "number": "3",
+          "name": "Nem Ran 3ks",
+          "description": "Zelí, vepřové mleté maso, skleněné nudle, cibule, shiitake, mrkev, sladko-kyselá omáčka",
+          "image": "nem-ran",
+          "allergens": [4],
+          "price": 70
+        },
+        {
+          "number": "4",
+          "name": "Crunchy Shrimps",
+          "description": "Křupavé krevety, sladká chilli omáčka.",
+          "image": "crunchy-shrimps",
+          "allergens": [1, 2],
+          "variantType": "quantity",
+          "variants": [
+            { "label": "3 ks", "price": 50 },
+            { "label": "5 ks", "price": 80 }
+          ]
+        },
+        {
+          "number": "5",
+          "name": "Cha Gio De 3ks",
+          "description": "Krevety, mrkev, shiitake, taro, cibule, sladké chilli omáčka",
+          "image": "cha-gio-de",
+          "allergens": [1, 2],
+          "price": 65
+        },
+        {
+          "number": "5A",
+          "name": "Ha Cao",
+          "description": "Krevetové knedlíčky dim sum, vařené v páře",
+          "image": "ha-cao",
+          "allergens": [1, 2, 3, 6, 7, 10, 11],
+          "variantType": "quantity",
+          "variants": [
+            { "label": "3 ks", "price": 60 },
+            { "label": "5 ks", "price": 80 }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "polevky",
+      "name": "Polévky",
+      "blurb": "Vývary, kokosové polévky a pho v plné porci.",
+      "items": [
+        {
+          "number": "6",
+          "name": "Pho S Class",
+          "description": "Vývar, rýžové nudle, koriandr, jarní cibulka, červená cibule",
+          "image": "pho-s-class",
+          "allergens": [4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s hovězím masem", "price": 50 },
+            { "label": "s kuřecím masem", "price": 50 }
+          ]
+        },
+        {
+          "number": "7",
+          "name": "Tom Yam",
+          "description": "Tom Yam pasta, kokosové mléko, citronová tráva, galangal, houby, cibule, lístek z limetky, jarní cibulka, koriandr",
+          "image": "tom-yam",
+          "allergens": [2],
+          "spicy": true,
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 40 },
+            { "label": "s krevetami", "price": 50 }
+          ]
+        },
+        {
+          "number": "8",
+          "name": "Pikantní polévka",
+          "description": "Kuře, cibule, mrkev, houby, bambusové výhonky, vejce, paprika, pepř",
+          "image": "spicy-soup",
+          "allergens": [],
+          "spicy": true,
+          "price": 30
+        },
+        {
+          "number": "9",
+          "name": "Coconut Drop",
+          "description": "Kokosové mléko, citronová tráva, kořen galangal, houby, kukuřice, koriandr.",
+          "image": "coconut-drop",
+          "allergens": [2],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 40 },
+            { "label": "s krevetami", "price": 50 }
+          ]
+        },
+        {
+          "number": "13",
+          "name": "Pho",
+          "description": "Vývar, rýžové nudle, jarní cibulka, koriandr, červená cibule, chilli, sójové klíčky, citron",
+          "image": "pho",
+          "allergens": [4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 150 },
+            { "label": "s tofu", "price": 115, "noMeat": true },
+            { "label": "se zeleninou", "price": 110, "noMeat": true }
+          ]
+        },
+        {
+          "number": "14",
+          "name": "Pho Tai Lan",
+          "description": "Restované hovězí maso, zázvor, hovězí vývar, rýžové nudle, jarní cibulka, koriandr, červená cibule, chilli, sójové klíčky, citron",
+          "image": "pho-tai-lan",
+          "allergens": [4, 6],
+          "price": 155
+        },
+        {
+          "number": "15",
+          "name": "Pho with Eye Round Steak",
+          "description": "Syrové hovězí maso, hovězí vývar, rýžové nudle, jarní cibulka, koriandr, červená cibule, chilli, sójové klíčky, citron, zázvor",
+          "image": "pho-eye-round",
+          "allergens": [4, 6],
+          "price": 160
+        }
+      ]
+    },
+
+    {
+      "id": "nudle",
+      "name": "Nudle",
+      "blurb": "Bun, smažené nudle a udon.",
+      "items": [
+        {
+          "number": "10",
+          "name": "Bun Cha",
+          "description": "Vietnamské rýžové nudle, grilované vepřové maso, okurka, sójové klíčky, mrkev, ledový salát, koriandr, sezam, citronová tráva, sladko-kyselá rybí omáčka",
+          "image": "bun-cha",
+          "allergens": [4, 6],
+          "price": 155
+        },
+        {
+          "number": "11",
+          "name": "Bun Nam Bo",
+          "description": "Vietnamské rýžové nudle, ledový salát, okurka, sójové klíčky, mrkev, koriandr, arašídy, smažená cibule, ústřicová omáčka, sladko-kyselá rybí omáčka",
+          "image": "bun-nam-bo",
+          "allergens": [4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 155 }
+          ]
+        },
+        {
+          "number": "16",
+          "name": "Bun Nem",
+          "description": "Nem Ran Rolls, rýžové nudle, okurka, sójové klíčky, mrkev, ledový salát, koriandr, sladko-kyselá rybí omáčka",
+          "image": "bun-nem",
+          "allergens": [4, 6],
+          "price": 125
+        },
+        {
+          "number": "17",
+          "name": "Pho Xao",
+          "description": "Smažené rýžové nudle, pak choy, rajčata, červená cibule, lusky, smažená cibule, vejce",
+          "image": "pho-xao",
+          "allergens": [3, 4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 145 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 120, "noMeat": true }
+          ]
+        },
+        {
+          "number": "18",
+          "name": "Japanese Udon",
+          "description": "Japonské nudle udon, paprika, lusky, mrkev, žampiony, chilli, sezam, smažená cibule, ústřicová omáčka",
+          "image": "japanese-udon",
+          "allergens": [],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 145 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 120, "noMeat": true }
+          ]
+        },
+        {
+          "number": "19",
+          "name": "Classy Noodle",
+          "description": "Thajské nudle, vejce, mrkev, paprika, lusky, chilli, ústřicová omáčka",
+          "image": "classy-noodle",
+          "allergens": [3, 4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 145 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 120, "noMeat": true }
+          ]
+        },
+        {
+          "number": "20",
+          "name": "Pad Thai",
+          "description": "Thajské nudle, vejce, mrkev, pórek, sójové klíčky, arašídy, chilli, citron, tamarind, ústřicová omáčka.",
+          "image": "pad-thai",
+          "allergens": [3, 4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 145 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 120, "noMeat": true }
+          ]
+        },
+        {
+          "number": "21",
+          "name": "Bun Xao",
+          "description": "Smažené rýžové nudle, vejce, pak choy, mrkev, sójové klíčky, červená cibule, smažená cibule, rybí omáčka.",
+          "image": "bun-xao",
+          "allergens": [3, 4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 145 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 120, "noMeat": true }
+          ]
+        },
+        {
+          "number": "32",
+          "name": "Smažené nudle",
+          "description": "Smažené nudle restované na wok pánvi.",
+          "image": "fried-noodles",
+          "allergens": [],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 110 },
+            { "label": "s hovězím masem", "price": 130 },
+            { "label": "s krevetami", "price": 150 },
+            { "label": "se zeleninou", "price": 100, "noMeat": true }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "ryzova-jidla",
+      "name": "Rýžová jídla",
+      "blurb": "Kari, smažená rýže a wok s rýží.",
+      "items": [
+        {
+          "number": "12",
+          "name": "Červené thajské kari s rýží",
+          "description": "Červená paprika, cuketa, mrkev, pórek, čínské zelí, cibule, limetka, červená curry pasta, rybí omáčka, cukr, kokosové mléko.",
+          "image": "thai-red-curry",
+          "allergens": [],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 130 },
+            { "label": "s hovězím masem", "price": 150 },
+            { "label": "s krevetami", "price": 190 },
+            { "label": "s tofu", "price": 120, "noMeat": true },
+            { "label": "se zeleninou", "price": 110, "noMeat": true },
+            { "label": "s křupavou kachnou", "price": 220 }
+          ]
+        },
+        {
+          "number": "22",
+          "name": "Smažená rýže s mladou rýží",
+          "description": "Smažená rýže, mladá rýže, kokos, lusky, kukuřice, vejce, pórek, mrkev",
+          "image": "fried-rice-young",
+          "allergens": [],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 130 },
+            { "label": "s hovězím masem", "price": 150 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 125, "noMeat": true }
+          ]
+        },
+        {
+          "number": "23",
+          "name": "Smažená rýže",
+          "description": "Smažená rýže, cuketa, sójové klíčky, smažená cibule, ananas, paprika, vejce, kurkuma, červená cibule, ústřicová omáčka.",
+          "image": "fried-rice",
+          "allergens": [2, 3, 4, 6],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 130 },
+            { "label": "s hovězím masem", "price": 150 },
+            { "label": "s krevetami", "price": 155 },
+            { "label": "s tofu", "price": 125, "noMeat": true }
+          ]
+        },
+        {
+          "number": "25",
+          "name": "Chicken & Lemongrass, Chilli",
+          "description": "Kuřecí maso, červená paprika, citronová tráva, chilli, ústřicová omáčka, česnek",
+          "image": "chicken-lemongrass",
+          "allergens": [],
+          "spicy": true,
+          "price": 135
+        },
+        {
+          "number": "31",
+          "name": "Kung Pao s rýží",
+          "description": "Restovaná zelenina a maso v pikantní omáčce kung pao, podáváno s rýží.",
+          "image": "kung-pao",
+          "allergens": [],
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 130 },
+            { "label": "s hovězím masem", "price": 140 }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "vegetarian",
+      "name": "Vegetarián",
+      "blurb": "Jídla zcela bez masa.",
+      "items": [
+        {
+          "number": "26",
+          "name": "Tofu & Vegetables",
+          "description": "Tofu, mrkev, červená cibule, lusky, sójové klíčky, pak choy, cuketa",
+          "image": "tofu-vegetables",
+          "allergens": [],
+          "vegetarian": true,
+          "price": 130
+        },
+        {
+          "number": "28",
+          "name": "Go Veggie",
+          "description": "Japonské nudle udon, mrkev, mořské řasy, žampiony, shiitake, sezam, lusky, smažená cibule",
+          "image": "go-veggie",
+          "allergens": [1, 11],
+          "vegetarian": true,
+          "price": 130
+        }
+      ]
+    },
+
+    {
+      "id": "krupava",
+      "name": "Křupavá",
+      "blurb": "Smažené a křupavé speciality s přílohou dle výběru.",
+      "items": [
+        {
+          "number": "29",
+          "name": "Smažený sýr s hranolkami",
+          "description": "Smažený sýr podávaný s hranolky.",
+          "image": "fried-cheese",
+          "allergens": [],
+          "price": 125
+        },
+        {
+          "number": "33",
+          "name": "Křupavá kachna",
+          "description": "Křupavá kachna s přílohou dle výběru.",
+          "image": "crispy-duck",
+          "allergens": [],
+          "variantType": "side",
+          "variants": [
+            { "label": "se smaženou rýží", "price": 210 },
+            { "label": "s omáčkou a rýží", "price": 190 },
+            { "label": "s rýží a zeleninou", "price": 210 },
+            { "label": "se smaženými nudlemi", "price": 210 },
+            { "label": "s hranolky", "price": 190 }
+          ]
+        },
+        {
+          "number": "34",
+          "name": "Křupavé smažené kuřecí prso",
+          "description": "Křupavé kuřecí prso s přílohou dle výběru.",
+          "image": "crispy-chicken-breast",
+          "allergens": [],
+          "variantType": "side",
+          "variants": [
+            { "label": "s omáčkou a rýží", "price": 130 },
+            { "label": "se smaženými nudlemi", "price": 130 },
+            { "label": "s hranolky", "price": 130 }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "allergens": [
+    [1, "Obiloviny obsahující lepek", "Pšenice, žito, ječmen, oves, špalda, kamut"],
+    [2, "Korýši", "a výrobky z nich"],
+    [3, "Vejce", "a výrobky z nich"],
+    [4, "Ryby", "a výrobky z nich"],
+    [5, "Podzemnice olejná (arašídy)", "a výrobky z ní"],
+    [6, "Sójové boby (sója)", "a výrobky z nich"],
+    [7, "Mléko", "a výrobky z něj"],
+    [8, "Skořápkové plody", "Mandle, lískové ořechy, vlašské ořechy, kešu, pistácie"],
+    [9, "Celer", "a výrobky z něj"],
+    [10, "Hořčice", "a výrobky z ní"],
+    [11, "Sezamová semena (sezam)", "a výrobky z nich"],
+    [12, "Oxid siřičitý a siřičitany", "v koncentracích vyšších než 10 mg/kg"],
+    [13, "Vlčí bob (lupina)", "a výrobky z něj"],
+    [14, "Měkkýši", "a výrobky z nich"]
+  ]
+}

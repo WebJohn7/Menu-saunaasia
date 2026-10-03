@@ -1,0 +1,566 @@
+/* ============================================================
+   Menu Asia — digital menu layout
+   Implements templates/digital-menu/DigitalMenu.dc.html from the
+   design system, adapted mobile-first (the template is desktop-only).
+   Every colour / size value below comes from tokens.css.
+   ============================================================ */
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper-100);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  overflow-wrap: break-word;
+}
+
+img { max-width: 100%; }
+
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: -100px;
+  z-index: 100;
+  background: var(--yellow-500);
+  color: var(--ink-900);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+.skip-link:focus { top: var(--space-4); }
+
+/* ---------- header ---------- */
+.site-header {
+  background: var(--ink-900);
+  color: var(--text-on-dark);
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-6);
+  flex-wrap: wrap;
+}
+
+.site-header__name {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-xl);
+  line-height: 1;
+  color: var(--yellow-400);
+}
+
+.site-header__tagline {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.site-header__hours {
+  font-size: var(--text-sm);
+  color: var(--text-on-dark-muted);
+}
+
+/* ---------- sticky control bar: categories + search + filters ---------- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--ink-800);
+  border-top: 1px solid var(--border-on-dark);
+  border-bottom: 3px solid var(--yellow-500);
+}
+.bar[hidden] { display: none; }
+
+.bar__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-on-dark-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.bar__back:hover { color: var(--yellow-500); }
+.bar__back svg { display: block; }
+
+.bar__nav {
+  display: flex;
+  gap: var(--space-5);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 var(--space-4);
+  scroll-snap-type: x proximity;
+}
+.bar__nav::-webkit-scrollbar { display: none; }
+
+.bar__link {
+  flex: none;
+  scroll-snap-align: start;
+  padding: var(--space-3) 0;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--paper-000);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.bar__link:hover { color: var(--yellow-500); }
+.bar__link.is-active { color: var(--yellow-500); border-bottom-color: var(--yellow-500); }
+.bar__link--allergens { color: var(--gold-300); margin-left: auto; }
+
+/* ---------- main ---------- */
+.main {
+  padding: var(--space-6) var(--space-4) var(--space-16);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ---------- category index (the landing screen) ---------- */
+.index { display: block; }
+.index[hidden] { display: none; }
+
+.index__title {
+  margin: 0 0 var(--space-5);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  color: var(--ink-900);
+}
+
+.index__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+
+/* The li stretches to the tallest card in its grid row; the card fills it,
+   so a two-line blurb does not leave its neighbours short. */
+.index__item { display: flex; }
+
+.index__card {
+  position: relative;
+  display: block;
+  flex: 1;
+  padding: var(--space-5) var(--space-10) var(--space-5) var(--space-5);
+  background: var(--paper-000);
+  border: 1px solid var(--border-on-light);
+  border-left: 4px solid var(--yellow-500);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+.index__card:hover {
+  border-color: var(--ink-900);
+  border-left-color: var(--yellow-500);
+  transform: translateX(2px);
+}
+
+.index__head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--gap-name-to-desc);
+}
+
+.index__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+  color: var(--red-600);
+}
+
+.index__count {
+  margin-left: auto;
+  flex: none;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.index__blurb {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.index__arrow {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--paper-400);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+.index__card:hover .index__arrow { color: var(--red-600); }
+
+/* The legend is reference material, not food — it reads as a different thing. */
+.index__card--allergens {
+  background: var(--ink-800);
+  border-color: var(--border-on-dark);
+  border-left-color: var(--gold-500);
+}
+.index__card--allergens:hover {
+  border-color: var(--gold-500);
+  border-left-color: var(--gold-500);
+}
+.index__card--allergens .index__name { color: var(--gold-300); }
+.index__card--allergens .index__blurb { color: var(--text-on-dark-muted); }
+.index__card--allergens .index__arrow { color: var(--text-on-dark-muted); }
+.index__card--allergens:hover .index__arrow { color: var(--gold-300); }
+
+/* ---------- one category page ---------- */
+.section { padding-bottom: var(--space-10); }
+.section[hidden] { display: none; }
+.allergens[hidden] { display: none; }
+
+.section__title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-3xl);
+  line-height: var(--leading-tight);
+  color: var(--red-600);
+}
+
+.section__blurb {
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min, 262px)), 1fr));
+}
+
+/* ---------- dish card ---------- */
+.card {
+  background: var(--paper-000);
+  border: 1px solid var(--border-on-light);
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+.card:hover { border-color: var(--ink-900); }
+.card[hidden] { display: none; }
+
+/* Dish photos are full-bleed scene shots, not transparent cut-outs, so the tile
+   crops them rather than letter-boxing. The plate shadow is in the photograph
+   itself — a drop-shadow filter here would outline the rectangle instead. */
+.card__media {
+  background: var(--paper-100);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card__body {
+  padding: var(--space-4) var(--space-4) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+
+.card__name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.card__allergens {
+  font-family: var(--font-body);
+  font-weight: var(--weight-semibold);
+  font-size: 11px;
+  margin-left: var(--space-1);
+  color: var(--text-muted);
+}
+
+.card__badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+.badge {
+  display: inline-block;
+  padding: 2px var(--space-2);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.badge--spicy { background: var(--accent-spicy); color: var(--paper-000); }
+.badge--vege  { background: var(--accent-veg);   color: var(--paper-000); }
+
+.card__desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--text-muted);
+}
+
+.card__price {
+  margin: auto 0 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-on-light);
+}
+
+.price-flat {
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  line-height: 1;
+  color: var(--price-on-light);
+}
+
+.variants {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--gap-variant-row);
+  font-size: var(--text-sm);
+}
+
+.variants li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.variants b {
+  font-weight: var(--weight-bold);
+  color: var(--price-on-light);
+  white-space: nowrap;
+}
+
+/* ---------- empty state ---------- */
+.empty {
+  padding: var(--space-16) var(--space-4);
+  text-align: center;
+}
+.empty[hidden] { display: none; }
+
+.empty__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+.empty__body { margin: 0; color: var(--text-muted); }
+
+/* ---------- allergen legend ---------- */
+.allergens {
+  scroll-margin-top: 120px;
+  background: var(--ink-900);
+  color: var(--text-on-dark);
+  padding: var(--space-8) var(--space-4) var(--space-10);
+}
+
+.allergens__title {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--yellow-400);
+}
+
+.allergens__note {
+  margin: 0 0 var(--space-6);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--text-on-dark-muted);
+}
+
+.allergens__grid {
+  display: grid;
+  gap: var(--space-3) var(--space-8);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+.allergen { display: flex; gap: var(--space-3); align-items: baseline; }
+
+.allergen__num {
+  flex: none;
+  width: 28px; height: 28px;
+  border: 2px solid var(--yellow-500);
+  border-radius: var(--radius-pill);
+  color: var(--yellow-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--weight-bold);
+  font-size: var(--text-xs);
+}
+
+.allergen__text { font-size: var(--text-base); }
+.allergen__sub { display: block; font-size: var(--text-sm); color: var(--text-on-dark-muted); }
+
+/* ---------- footer ---------- */
+.site-footer {
+  background: var(--ink-800);
+  color: var(--text-on-dark-muted);
+  padding: var(--space-6) var(--space-4);
+  display: flex;
+  gap: var(--space-2) var(--space-6);
+  flex-wrap: wrap;
+  font-size: var(--text-sm);
+}
+.site-footer a { color: var(--yellow-500); text-decoration: none; }
+.site-footer a:hover { color: var(--yellow-400); }
+.site-footer__vat { margin-left: auto; }
+
+/* ---------- to-top ---------- */
+.to-top {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 30;
+  width: 48px; height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink-900);
+  color: var(--yellow-500);
+  border: 1px solid var(--yellow-500);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-base) var(--ease-out),
+              visibility var(--duration-base) var(--ease-out);
+}
+.to-top.is-visible { opacity: 1; visibility: visible; }
+.to-top:hover { background: var(--yellow-500); color: var(--ink-900); }
+
+/* ============================================================
+   Wider screens — step back up to the template's desktop values
+   ============================================================ */
+
+@media (min-width: 600px) {
+  .site-header { padding: var(--space-5) var(--space-8) var(--space-4); }
+  .site-header__name { font-size: var(--text-2xl); }
+  .site-header__tagline { font-size: var(--text-xs); }
+  .site-header__hours { margin-left: auto; }
+  .bar__nav { padding-inline: var(--space-8); }
+  .bar__back { padding-inline: var(--space-8); }
+  .index__title { font-size: var(--text-4xl); }
+  .index__list { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); }
+  .index__name { font-size: var(--text-2xl); }
+  .main { padding: var(--space-10) var(--space-8) var(--space-20); }
+  .section { padding-bottom: var(--space-12); }
+  .section__title { font-size: var(--text-4xl); }
+  .section__blurb { font-size: var(--text-base); margin-bottom: var(--space-6); }
+  .card__media { aspect-ratio: 1 / 1; }
+  .card__name { font-size: 19px; }
+  .card__desc { font-size: var(--text-sm); }
+  .grid { gap: var(--space-5); }
+  .allergens { padding: var(--space-10) var(--space-8) var(--space-10); }
+  .allergens__title { font-size: var(--text-2xl); }
+  .site-footer { padding: var(--space-6) var(--space-8); }
+}
+
+@media (min-width: 1000px) {
+  .site-header { padding: var(--space-5) var(--space-10) var(--space-4); }
+  .site-header__name { font-size: 30px; }
+  .bar__nav { gap: var(--space-8); padding-inline: var(--space-10); }
+  .bar__link { font-size: var(--text-xs); padding: var(--space-4) 0; }
+  .bar__back { padding-inline: var(--space-10); }
+  .index__list { grid-template-columns: repeat(3, 1fr); }
+  .main { padding: var(--space-12) var(--space-10) var(--space-20); }
+  .section { padding-bottom: 56px; }
+  .section__title { font-size: var(--text-5xl); }
+  .grid { gap: 22px; }
+  .allergens { padding: var(--space-10) 36px var(--space-12); }
+  .allergens__title { font-size: var(--text-2xl); }
+  .site-footer { padding: 28px var(--space-10); }
+}
+
+@media (min-width: 1280px) {
+  .section__title { font-size: 64px; }
+}
+
+/* ---------- print: a clean paper fallback ---------- */
+@media print {
+  .bar, .to-top, .skip-link, .index { display: none !important; }
+  /* The router hides five of six categories on screen; paper shows them all. */
+  .section[hidden], .allergens[hidden] { display: block !important; }
+  body { background: #fff; }
+  .card { break-inside: avoid; border-color: #999; }
+  .section { break-before: page; }
+  .section:first-of-type { break-before: auto; }
+}

@@ -1,0 +1,506 @@
+# Digital Menu — QR-scannable web menu (Vietnamese/Thai restaurant)
+
+## Context
+
+Guests at a table have to flag down a waiter to get a menu. The goal is a web page they
+reach by scanning a QR code on the table: real categories they can tap through, dish
+descriptions and prices — not a PDF scan.
+
+Scope is **display only**. No ordering, no payments, no accounts. A chatbot that answers
+questions about the menu is wanted later, so `menu.json` is designed now to double as
+that chatbot's knowledge base — but nothing chatbot-related gets built yet.
+
+Seven page scans were uploaded to `menu/` (1131×1600 each): six food pages and one EU
+allergen legend. They have been read in full; the inventory below is what they contain.
+
+**Decisions locked:**
+
+| Decision | Choice |
+|---|---|
+| Stack | Plain HTML/CSS/JS + `menu.json`. No build step, no npm, no dependencies. |
+| Language | Czech only, prices in Kč. |
+| Dish tap | Modal / bottom sheet. |
+| Hosting | GitHub Pages. |
+| Photos | Cropped out of the page scans. |
+| Allergens | Included, plus a legend screen. |
+| Dish flags | Spicy indicator. |
+| Categories | Fixed by the user — see below. |
+| **Visual design** | **Deferred** — user is designing a system in Claude Design and will send it with inspirations and a chosen direction. |
+
+## Menu structure — 32 dishes, 6 categories
+
+Categories as specified by the user. Dish numbers are kept exactly as printed — staff and
+regulars order by number, so renumbering would break the restaurant, not just the site.
+Within each category, dishes stay in ascending number order.
+
+| Category | Dish numbers | Count | Price range |
+|---|---|---|---|
+| Předkrmy | 1, 2, 3, 4, 5, 5A | 6 | 50–80 Kč |
+| Polévky | 6, 7, 8, 9, 13, 14, 15 | 7 | 30–160 Kč |
+| Nudle | 10, 11, 16, 17, 18, 19, 20, 21, 32 | 9 | 100–155 Kč |
+| Rýžová jídla | 12, 22, 23, 25, 31 | 5 | 110–220 Kč |
+| Vegetarián | 26, 28 | 2 | 130 Kč |
+| Křupavá | 29, 33, 34 | 3 | 125–210 Kč |
+| Nápoje | — | pending | user is sending the drinks list |
+
+**Dropped as permanently unavailable: 24, 27, 30, 35.** They are not transcribed at all,
+so they cannot leak into the site or the future chatbot.
+
+One note on *Polévky*: it now spans 30 Kč starter soups (6–9) and 110–160 Kč main-course
+pho bowls (13–15). Printed number order puts the small soups first, which reads correctly
+on its own, so no sub-heading is needed — but the card price is what tells a guest which
+is which, so "od 110 Kč" must be visible on the card, not hidden in the modal.
+
+## The structural finding that shapes the data model
+
+**20 of the 32 dishes are not single-price.** They are one base dish with 2–6 priced
+variants:
+
+- #13 Pho — kuřecí 125 / hovězí 150 / tofu 115 / zelenina 110
+- #12 Červené thajské kari — 6 variants, 110–220 Kč (incl. křupavá kachna)
+- #33 Křupavá kachna — 5 side variants, 190–210 Kč
+- #4 Crunchy Shrimps — 3ks 50 / 5ks 80 (a *quantity* variant, not a protein one)
+
+So a flat `price` field is wrong. The model needs `variants[]`, cards show **"od 110 Kč"**,
+and the modal carries the full price list. Variants come in three kinds — protein
+(kuřecí/hovězí/krevety/tofu/zelenina), quantity (3ks/5ks), and side (s rýží / s hranolky /
+se smaženými nudlemi) — so each dish carries a `variantType` the UI labels by.
+
+The remaining 12 dishes are flat-priced: 2, 3, 5, 8, 10, 14, 15, 16, 25, 26, 28, 29.
+
+## Data model — `data/menu.json`
+
+Hand-editable by a non-programmer. One file is the whole menu.
+
+```json
+{
+  "restaurant": { "name": "?", "currency": "Kč" },
+  "allergenLegend": { "1": "Obiloviny obsahující lepek", "2": "Korýši", "…": "…" },
+  "categories": [
+    {
+      "id": "polevky",
+      "name": "Polévky",
+      "items": [
+        {
+          "number": "13",
+          "name": "Pho",
+          "description": "Vývar, rýžové nudle, jarní cibulka, koriandr, červená cibule, chilli, sójové klíčky, citron",
+          "image": "images/13-pho.jpg",
+          "allergens": [4, 6],
+          "spicy": false,
+          "variantType": "protein",
+          "variants": [
+            { "label": "s kuřecím masem", "price": 125 },
+            { "label": "s hovězím masem", "price": 150 },
+            { "label": "s tofu",          "price": 115, "vegetarian": true },
+            { "label": "se zeleninou",    "price": 110, "vegetarian": true }
+          ]
+        },
+        {
+          "number": "14", "name": "Pho Tai Lan", "price": 155,
+          "description": "…", "allergens": [4, 6]
+        }
+      ]
+    }
+  ]
+}
+```
+
+Flat dishes use `price`; multi-price dishes use `variants[]`. The render layer handles
+both, so the file stays as simple as each dish actually is.
+
+## Transcription — the part that needs care
+
+Descriptions are transcribed by hand from the scans. The printed menu contains roughly a
+dozen typos, which I will **normalise and list for your approval** rather than silently
+copy or silently keep:
+
+| Printed | Correct |
+|---|---|
+| kodiandr (#11, #13, #14) | koriandr |
+| jarni / jarnl cibulka | jarní cibulka |
+| sládké chili (#5) | sladké chilli |
+| krupava kachna (#12 variant) | křupavá kachna |
+| SMAŽENÉ RÝŽE S MLADÁ RÝŽE (#22) | Smažená rýže s mladou rýží |
+| červná cibule (#21) | červená cibule |
+| zell (#2) | zelí |
+| porek, rybi omáčka | pórek, rybí omáčka |
+
+Anything genuinely ambiguous (an unreadable price, a variant list cut off at the page
+edge) gets flagged to you rather than guessed.
+
+## Photos
+
+32 square crops cut from the six page scans into `images/`, named `13-pho.jpg` etc.
+
+**Honest limit:** at 1131×1600 per page, each dish crop lands around 350–450px. That is
+crisp on a grid card (~180px CSS at 2×) but slightly soft as a full-width photo in the
+modal on a phone. Good enough to launch; swapping in real photos later is a file drop with
+no code change. Two of the six pages shoot on white marble and four on black brick, so
+crops carry two different backgrounds — how that is reconciled depends on the theme, and
+is one thing your design system needs to answer.
+
+## Site structure
+
+```
+Desktop/Digital menu/
+  index.html            header, category bar, sections, modal, allergen sheet
+  assets/css/tokens.css design tokens ONLY — the file your design system replaces
+  assets/css/styles.css layout + components, written against tokens
+  assets/js/app.js      render, scroll-spy, modal, search, filters
+  data/menu.json        THE menu — the only file to edit to change dishes
+  images/               32 cropped dish photos
+  menu/                 original scans, kept as the source of truth
+  tools/qr.html         local QR generator (not customer-facing)
+  plan.txt, README.md, CLAUDE.md
+```
+
+The tokens/styles split is the point: **every colour, font, radius and spacing value lives
+in `tokens.css`.** When your Claude Design system arrives, applying it means editing that
+one file — no layout or JS is touched.
+
+## Interaction design
+
+- **Mobile-first**, designed at 390px, breathing into 2–3 columns wider. Every scan is a
+  phone at a table.
+- **Sticky category bar** — scrollable chips, active chip follows scroll
+  (`IntersectionObserver`), tap smooth-scrolls to the section. One long page, no reloads
+  over restaurant wifi.
+- **Card** — number, name, short description, photo, "od 110 Kč" or a flat price, spicy
+  and vegetarian marks.
+- **Modal** on `<dialog>` (free focus trap + Esc) — large photo, full description, the
+  complete variant price list, allergen numbers that tap through to their meaning.
+- **Search** — one input filtering across all categories, matching dish name, description
+  **and number**, since guests and staff say "dvacet dva".
+- **Two filters** — *vegetariánské* and *pikantní*. The Vegetarián category holds the two
+  fully meat-free dishes (26, 28); the filter is what surfaces the ~12 dishes in other
+  categories that have a tofu or zelenina variant, which is otherwise invisible.
+- **Allergen legend** — a sheet reachable from the header, transcribed from scan 7.
+
+## Implementation order
+
+Phases A and C do not depend on the design system; only B does.
+
+**Phase A — data and structure (can start now)**
+1. Save `plan.txt` into the project folder (project rule).
+2. Transcribe all 32 dishes into `menu.json` — variants, allergens, spicy flags, legend.
+   Produce the typo list for your approval.
+3. Crop the dish photos from the six scans into `images/`.
+4. Build `index.html` + `app.js` — render, scroll-spy, modal, search, filters — against a
+   neutral placeholder token set.
+5. Verify behaviour on a phone-sized viewport.
+
+**Phase B — visual skin (when your design system + inspirations arrive)**
+6. Translate the design system into `tokens.css`; adjust type scale and card treatment to
+   the chosen direction.
+7. Reconcile the two photo backgrounds with that direction.
+
+**Phase C — ship**
+8. Add the `Nápoje` category when you send the drinks list.
+9. `tools/qr.html` generates the table QR from the live URL.
+10. `git init`, push to GitHub, enable Pages, generate the QR against the real URL.
+11. `README.md` + `CLAUDE.md` — how to add a dish, change a price, swap a photo, redeploy.
+
+## Open items
+
+- **Restaurant name** — appears on none of the scans; needed for the header, page title
+  and QR card. Placeholder until you say.
+- **Drinks list** — you're sending it; category slot stays ready.
+- **Design system** — you're producing it in Claude Design; Phase B waits on it.
+
+## Not in scope
+
+Ordering, cart, payments, table identification, admin UI, CMS, analytics, chatbot.
+
+## Verification
+
+- `npx serve .`, then open the local URL. `fetch()` of `menu.json` needs `http://`, not
+  `file://`.
+- **Data check:** all 32 dishes render, and 24/27/30/35 appear nowhere. Each dish shows a
+  flat price or a correct "od X Kč" from its cheapest variant; spot-check #12, #33 and #4
+  against the scans, since those carry the most variants.
+- **Category check:** each of the six categories holds exactly the numbers listed above —
+  in particular 13/14/15 under Polévky and 32 under Nudle, which is the non-obvious part.
+- **Phone check:** DevTools at 390×844 — no horizontal scroll, tap targets ≥44px, category
+  bar stays pinned.
+- **Interaction check:** chips scroll to the right section and follow manual scrolling;
+  modal closes via Esc, backdrop and button, returning to the same scroll position;
+  searching "22" finds dish 22; the vegetarian filter surfaces tofu-variant dishes beyond
+  the Vegetarián category.
+- **Content check:** every dish shows a photo or a clean fallback — no broken image icons.
+- **Failure check:** a deliberately broken `menu.json` shows a readable message, not a
+  blank screen.
+- **End-to-end:** after deploy, scan the real QR with a phone over mobile data.
+
+
+================================================================================
+BUILD LOG — updated after implementation (design system applied)
+================================================================================
+
+STATUS: Phase A + B complete and tested. Phase C (drinks, deploy, QR) outstanding.
+
+WHAT CHANGED FROM THE PLAN ABOVE
+--------------------------------
+1. Photos: NOT cropped from the scans. The Claude Design bundle shipped 34 proper
+   cut-out PNGs, so the "softness" caveat in the plan is gone. 32 of them are used.
+2. Modal: DROPPED. The design template prints every variant price on the card itself,
+   so a modal would have added a tap for nothing. Search and filters kept.
+3. Categories: the design template used 5 (Předkrmy / Polévky / Nudle a kari / Rýže /
+   Speciality). Client confirmed the 6-category spec wins. Pho 13-15 sit under Polévky.
+4. Typos: design system readme says transcribe verbatim. Client overrode -> normalized.
+5. Mobile: the design template is desktop-only (1280x900, no media queries). Rebuilt
+   mobile-first with breakpoints at 600 / 1000 / 1280px stepping up to its values.
+
+TYPOS NORMALIZED (from printed menu -> digital)
+-----------------------------------------------
+  zell                          -> zelí                      (#2)
+  Zeli                          -> Zelí                      (#3)
+  sládké chili                  -> sladké chilli             (#5)
+  jarni / jarnl cibulka         -> jarní cibulka             (#6,7,13,14)
+  listek z limetky              -> lístek z limetky          (#7)
+  kořeni galangal               -> kořen galangal            (#9)
+  kodiandr                      -> koriandr                  (#10,11,13,14,15,16)
+  sojové / sójové kličky        -> sójové klíčky             (many)
+  arašidy                       -> arašídy                   (#11,20)
+  smažené cibule                -> smažená cibule            (#11,17,18,21)
+  sladko - kyselá               -> sladko-kyselá             (#10,11,16)
+  Červené thajské kari a rýži   -> Červené thajské kari s rýží (#12)
+  s zeleninou                   -> se zeleninou              (#12,13)
+  s krupava kachna              -> s křupavou kachnou        (#12)
+  s hovézim masem               -> s hovězím masem           (#13)
+  Japanské                      -> Japonské                  (#18)
+  chili                         -> chilli                    (#18)
+  tamarind ústřicová omáčka     -> tamarind, ústřicová omáčka (#20)
+  červná cibule                 -> červená cibule            (#21,26)
+  rybi omáčka                   -> rybí omáčka               (#21)
+  Smažené rýže s mladá rýže     -> Smažená rýže s mladou rýží (#22)
+  mladé ryže                    -> mladá rýže                (#22)
+  porek                         -> pórek                     (#22)
+  Smažené rýže                  -> Smažená rýže              (#23)
+  pakchoy                       -> pak choy                  (#26)
+  Kung Pao s rýži               -> Kung Pao s rýží           (#31)
+  s smažená rýže                -> se smaženou rýží          (#33)
+  s smažené nudle               -> se smaženými nudlemi      (#33,34)
+
+DESCRIPTIONS WRITTEN BY ME (no description on the scans) — CONFIRM WITH RESTAURANT
+-----------------------------------------------------------------------------------
+  5A Ha Cao        "Krevetové knedlíčky dim sum, vařené v páře"
+  29 Smažený sýr   "Smažený sýr podávaný s hranolky."
+  31 Kung Pao      "Restovaná zelenina a maso v pikantní omáčce kung pao, podáváno s rýží."
+  32 Smažené nudle "Smažené nudle restované na wok pánvi."
+  33 Křupavá kachna "Křupavá kachna s přílohou dle výběru."
+  34 Křupavé prso  "Křupavé kuřecí prso s přílohou dle výběru."
+
+ACCURACY NOTE — THE "BEZ MASA" FILTER
+--------------------------------------
+Filter is labelled "Bez masa", NOT "Vegetariánské", on purpose. Dishes like #12, #20,
+#21 have a tofu variant but fish or oyster sauce in the base, so they are meat-free but
+not vegetarian. Only #26 and #28 carry the green Vege badge.
+
+OUTSTANDING
+-----------
+  [ ] Real brand details (name, tagline, hours, address, phone) -> data/menu.json
+  [ ] Drinks list -> new "napoje" category
+  [ ] Confirm the 6 invented descriptions above
+  [ ] Convert dish PNGs to WebP (6.4 MB -> ~1.2 MB); needs a one-off tool download
+  [ ] Test tools/qr.html in a browser; scan with a real phone
+  [ ] git init, push, enable GitHub Pages, generate QR against the live URL
+
+CHANGES AFTER THE FIRST REVIEW
+-------------------------------
+2026-09-17 — Search + filters removed from the UI (client request)
+  Removed: the search input and its clear button, the "Bez masa" and "Pikantní"
+  filter buttons, the whole .bar__tools strip, the result counter (.status) and the
+  no-results box (.empty markup). The sticky bar is now category navigation only.
+
+  Kept: the pure matching helpers in app.js (fold, hasNoMeatOption, searchIndex,
+  matches, plural) and all 32 tests, which still pass. Nothing in the page calls
+  them any more, but they hold menu rules the planned chatbot will need — diacritic
+  folding, and the meat-free-vs-vegetarian distinction described above. The ui keys
+  in menu.json that fed the removed controls (searchPlaceholder, filters, emptyTitle,
+  emptyBody, resultsOne/Few/Many) are left in the data for the same reason.
+
+  The "ACCURACY NOTE — THE BEZ MASA FILTER" above now describes the data flag only,
+  not a visible control. The green Vege badge on #26 and #28 is unaffected and still
+  renders on the cards.
+
+2026-09-17 — One page per category (client request)
+  The single long scroll is gone. The landing screen is now a category index: six
+  cards, each with the category name, its blurb and its dish count ("9 jídel"), plus
+  a dark card for the allergen legend. Tapping one opens that category alone.
+
+  Implemented as hash routing inside the one index.html — no extra HTML files, no
+  build step, one URL for the QR code:
+      #/            category index (also the no-hash default)
+      #/nudle       one category
+      #/alergeny    allergen legend
+  Every category is rendered once at boot; the router only toggles [hidden]. Browser
+  back/forward work, and a category URL can be shared.
+
+  Consequence: a category id is now part of a URL. Renaming an id breaks printed QR
+  codes and shared links — change the display name instead.
+
+  Added to menu.json ui: indexTitle ("Jídelní lístek"), backLabel ("Zpět").
+  Removed from app.js: trackBarHeight and wireScrollSpy — both existed only to track
+  position within one long page.
+  Print CSS now un-hides every category, so printing still gives the whole menu.
+
+2026-09-17 — Router fix: non-route hashes on first load
+  Symptom: a tab still holding the old-style anchor "#predkrmy" reloaded into the new
+  build and rendered the category index AND all six categories stacked underneath it.
+
+  Cause: readRoute returned null for any hash not starting with "#/", and showRoute
+  treated null as "leave the current view alone". That is right for the skip link's
+  "#obsah" mid-session, but on the initial render nothing has been hidden yet, so
+  "leave alone" meant "show everything".
+
+  Fix: showRoute takes a `first` flag — on the initial render a non-route hash falls
+  back to the index instead of leaving the page untouched. readRoute additionally
+  resolves the old plain-anchor form ("#nudle") to the matching category, so links
+  and open tabs from the pre-routing version keep working.
+
+2026-09-17 — Dish photography: re-shoot via crop + Higgsfield
+  Problem: the 32 dish PNGs in assets/img/dishes/ look badly cropped and low quality.
+  Root cause is the source, not the crop — they descend from the design-system
+  template, and the only real photographs of these dishes are the ones printed on the
+  paper menu, where each dish occupies roughly 350 px of an already-compressed JPEG
+  scan. There was never any detail to preserve. Upscaling alone cannot invent it, so
+  the dishes are being re-rendered image-to-image instead.
+
+  THE PIPELINE
+  1. Crop every dish out of menu/menu1..6.jpg  ->  menu/crops/<slug>.png  (done)
+       Dark pages (1,3,5,6): found automatically — threshold the brick background at
+       max(r,g,b)>95, erode by 9 px to destroy text strokes, dilate by 13, take
+       connected components over 6000 px. Gold leaf decorations and dishes 30/35 were
+       dropped by hand.
+       Light marble pages (2,4): that fails — white bowls on a white ground vanish and
+       the pale watercolour leaves survive. Boxes there are hand-placed.
+       Page 7 is the allergen list; no dishes.
+       Boxes live in the session scratchpad as boxes.json; the crops themselves are
+       committed under menu/crops/ so the step need not be repeated.
+  2. Upload each crop to Higgsfield (presigned PUT + media_confirm), together with
+     menu/background/chicken-dish-restaurant-table.jpg as a shared setting reference.
+  3. gpt_image_2_5, quality high, 2K, 1:1, background opaque, two image_references
+     (dish first, setting second). 3 credits per dish.
+  4. Colour-match the wood across all 32 locally with sharp (free), then encode WebP.
+  5. Only then replace assets/img/dishes/ and switch the tiles to object-fit: cover.
+
+  THE PROMPT — the three things it has to hold down
+    a. "Recreate it exactly ... do not add, remove or substitute any ingredient, and
+       do not change the vessel." Without this the model plates a prettier dish that
+       the kitchen does not serve.
+    b. "REFERENCE 2 is the setting, not the food ... must not appear anywhere."
+       The setting photo contains chicken, mash and rocket. It has to be named and
+       excluded explicitly. Verified clean on both test renders.
+    c. Grain pinned — "wood grain running horizontally, left to right, medium warm
+       oak, no knots, no plank seams" — added after the first test showed the two
+       renders on visibly different wood.
+
+  CLIENT DECISIONS (2026-09-17)
+    - Same dish, same bowl, same garnish. One shared background on every dish.
+    - Background image supplied by the client: menu/background/.
+    - Test 2 first (pho, crunchy-shrimps), then the remaining 30 in one run.
+    - Wood consistency: pin the grain in the prompt AND colour-match afterwards,
+      rather than compositing onto one fixed plate. Keeps the real cast shadows.
+
+  KNOWN LIMIT, ACCEPTED
+    The pho bowl changed shape — the paper menu shows a distinctive wavy-rimmed bowl,
+    the render gives a plain round bowl on a saucer. "Same bowl" holds at the level of
+    "white ceramic soup bowl", not the exact piece. Expect this on 13/14/15 too.
+
+  CREDITS
+    Started at 106. Test of 2 cost 6. Remaining 30 cost 90, leaving 10 — no budget
+    for a second full pass, so results are reviewed on a contact sheet before
+    anything is written into assets/.
+
+2026-09-17 — Dish photography: the run, and what came out of it
+  All 32 dishes re-rendered. 30 in six batches of five (gpt_image_2_5, high, 2K, 1:1,
+  opaque, two image_references each), plus the two test renders from earlier. Zero
+  failed jobs. 96 credits of the 106 spent; 10 left.
+
+  WHAT THE TEST CHANGED
+  The first two renders (pho, crunchy-shrimps) came back on visibly different wood —
+  one yellower with vertical grain, one lighter with horizontal. That is what put the
+  grain clause into the prompt for the remaining 30:
+      "a warm light-oak table with the grain running horizontally from left to right,
+       no knots and no visible plank seams"
+  It worked: the 30 that carry it sit on one consistent surface. The two that do not
+  are still the only outliers in the set.
+
+  COLOUR MATCH (free, local, sharp)
+  Per image, sample the outer 8% ring at 256x256 and take the MEDIAN per channel —
+  median not mean, so a plate or shadow poking into the ring cannot drag the reading.
+  Target is the median of those 32 readings (219,168,98), so no single image defines
+  the look. Apply a per-channel linear gain, clamped to [0.85, 1.18] so a bad reading
+  can never wreck an image. Most needed under 5%; the worst were spicy-soup 15%,
+  fried-rice-young 14%, bun-nem 13%, tom-yam 13%.
+  Note the gain is global, so it shifts the food slightly too. That is deliberate —
+  it behaves like a white-balance correction rather than a background-only patch,
+  which would leave the dish looking pasted on.
+
+  OUTPUT
+    assets/img/dishes/   32 x 800px  q80 webp   4.08 MB   (was 6.4 MB of PNG)
+    menu/masters/        32 x 1400px q88 webp  14.16 MB   archive, not served
+  800px was chosen against the layout: cards are minmax(262px, 1fr), so the widest a
+  tile ever renders is ~330 CSS px — 800px covers that to about DPR 2.4.
+  Full-resolution 2048px PNGs were NOT kept; they were 211 MB. Masters are the
+  re-editable copy, and re-encoding from them costs nothing where regenerating costs
+  credits.
+
+  CODE CHANGES
+    app.js       '.png' -> '.webp' in the dish img src
+    styles.css   .card__media now overflow:hidden; img is width/height 100% with
+                 object-fit: cover. Dropped the drop-shadow filter — on an opaque
+                 rectangle it outlines the tile instead of the plate, and the plate
+                 shadow is now inside the photograph.
+    serve.js     added ".webp":"image/webp"; without it the preview server sent
+                 application/octet-stream and relied on browser sniffing
+    menu.test.js the "every dish has a photo file" check now looks for .webp
+  32/32 tests pass. Verified over http: index, app.js and all 32 photos return 200,
+  photos as image/webp; the old .png paths 404.
+
+  STILL OPEN
+    pho and crunchy-shrimps are on the pre-pinning wood. 6 credits to re-render the
+    pair with the final prompt, which would leave 4. Client's call.
+
+2026-09-17 — Real footer details (client)
+  restaurant.address  "Vodičkova 12, Praha 1"  -> "Tyršova 287, Bělá pod Bezdězem"
+  restaurant.phone    "+420 777 123 456"       -> "608 099 881"
+  ui.vatNote          removed — the client asked for the right-hand footer line
+                      ("Ceny jsou uvedeny v Kč včetně DPH.") to go.
+
+  Only the DATA was removed for the VAT note. The `if (menu.ui.vatNote)` branch in
+  renderBrand and the `.site-footer__vat { margin-left: auto }` rule both stay: they
+  are a matched, guarded pair, so putting the key back in menu.json restores the line
+  in its old position with no code change. That is the point of menu.json being the
+  source of truth.
+
+  The tel: href is derived by stripping spaces, so it is now tel:608099881 — correct
+  for a Czech phone, but a foreign handset will not dial it. Storing the number as
+  "+420 608 099 881" would fix that and is a one-field change if the client wants it.
+
+  restaurant.name is STILL "Menu Asia" and tagline/hours are still design-system
+  placeholders. The footer therefore reads "Menu Asia · Tyršova 287, Bělá pod
+  Bezdězem". Confirm the real name and opening hours before printing QR codes.
+
+2026-09-17 — Real name and kitchen hours (client)
+  restaurant.name   "Menu Asia"                 -> "Restaurace Sauna Asia"
+  restaurant.hours  "Otevřeno denně 10:30–21:30" -> "Kuchyně 10:00–20:00"
+
+  One field, two places: restaurant.name drives BOTH the header logo
+  (.site-header__name) and the left half of the footer, so the footer now reads
+  "Restaurace Sauna Asia · Tyršova 287, Bělá pod Bezdězem".
+
+  Wording of the hours: the client said "kitchen is open 10:00-20:00", so the label
+  was changed from "Otevřeno denně" to "Kuchyně". That is true whether or not the
+  restaurant itself stays open later — "Otevřeno denně 10:00–20:00" would have claimed
+  something the client did not actually say. Change it back if the two are the same.
+
+  Still outstanding: restaurant.tagline is design-system placeholder text, and
+  index.html has a hardcoded <title>Menu</title> that no data drives.
+
+2026-10-03 — Kitchen hours removed from the header (client)
+  restaurant.hours  "Kuchyně 10:00–20:00"  -> removed
+  Data-only change, same pattern as ui.vatNote: renderBrand already does
+  `if (r.hours) ... else hours.remove()`, so the empty span is dropped from the DOM.
+  The .site-header__hours CSS and the guard stay; putting the key back restores it.

@@ -1,0 +1,53 @@
+:root{
+  /* — Base: ink (the dark brick pages) — */
+  --ink-900:#0A0A0A;--ink-800:#121212;--ink-700:#1C1C1C;--ink-600:#262626;--ink-500:#333333;--ink-400:#4A4A4A;
+
+  /* — Base: paper (the light marble pages) — */
+  --paper-000:#FFFFFF;--paper-100:#F5F4F1;--paper-200:#EAE8E3;--paper-300:#D8D5CE;--paper-400:#B9B5AC;
+
+  /* — Base: signal yellow (prices + titles on dark) — */
+  --yellow-300:#FFF48A;--yellow-400:#FFF200;--yellow-500:#FFE500;--yellow-600:#F0C400;
+
+  /* — Base: chilli red (prices on light, allergen sheet) — */
+  --red-400:#EE4A3F;--red-500:#E11B22;--red-600:#C3122B;--red-700:#96101F;
+
+  /* — Base: gold (leaf ornaments, plate rims) — */
+  --gold-200:#F0DDA5;--gold-300:#E6C86B;--gold-500:#C9A227;--gold-700:#8A6B14;
+
+  /* — Base: botanical sage (watercolour leaf art) — */
+  --sage-300:#C3CFB6;--sage-400:#9CAE8C;--sage-600:#6D7F5C;
+
+  /* — Base: ceramic blue (the studio plate colour) — */
+  --ceramic-300:#AFC2CC;--ceramic-500:#7E9AA8;--ceramic-700:#4E6775;
+
+  /* — Semantic: surfaces — */
+  --surface-dark:var(--ink-900);
+  --surface-dark-raised:var(--ink-700);
+  --surface-light:var(--paper-100);
+  --surface-card:var(--paper-000);
+  --surface-overlay:rgba(10,10,10,.82);
+
+  /* — Semantic: text — */
+  --text-strong:var(--ink-900);
+  --text-body:var(--ink-700);
+  --text-muted:#55524C;
+  --text-on-dark:var(--paper-000);
+  --text-on-dark-muted:#CFCCC6;
+  --text-inverse:var(--paper-000);
+
+  /* — Semantic: price + accents — */
+  --price-on-dark:var(--yellow-500);
+  --price-on-light:var(--red-500);
+  --accent-gold:var(--gold-500);
+  --accent-spicy:var(--red-500);
+  --accent-veg:var(--sage-600);
+
+  /* — Semantic: lines + focus — */
+  --border-on-dark:rgba(255,255,255,.14);
+  --border-on-light:rgba(10,10,10,.12);
+  --border-strong:var(--ink-900);
+  --focus-ring:var(--yellow-400);
+
+  /* — Semantic: state — */
+  --state-success:#3F7D3B;--state-warning:var(--yellow-600);--state-danger:var(--red-500);
+}

@@ -1,0 +1,13 @@
+:root{
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;
+  --space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;--space-20:80px;--space-24:96px;
+
+  /* Semantic rhythm lifted off the printed page */
+  --gap-name-to-desc:6px;        /* dish name → description */
+  --gap-desc-to-variants:10px;   /* description → price list */
+  --gap-variant-row:3px;         /* between "- s tofu   120 kč" rows */
+  --gap-dish-block:56px;         /* between two dish entries in a column */
+  --gap-column:48px;             /* between menu columns */
+  --page-margin:56px;            /* outer margin of a menu page */
+  --measure-desc:34ch;           /* max width of a dish description */
+}

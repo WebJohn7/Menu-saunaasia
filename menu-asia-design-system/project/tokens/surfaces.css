@@ -1,0 +1,15 @@
+/* The two page grounds of the menu, as reusable background tokens.
+   Paths are relative to this file (tokens/ → assets/). */
+:root{
+  --img-brick:url("../assets/textures/brick-tile.png");/* @kind other */
+  --img-marble:url("../assets/textures/marble-tile.png");/* @kind other */
+  --img-leaf-gold-left:url("../assets/ornaments/gold-leaf-left.png");/* @kind other */
+  --img-leaf-gold-right:url("../assets/ornaments/gold-leaf-right.png");/* @kind other */
+
+  --bg-dark-page:var(--ink-900) var(--img-brick) repeat;/* @kind other */
+  --bg-light-page:var(--paper-100) var(--img-marble) repeat;/* @kind other */
+  --bg-dark-page-size:360px auto;/* @kind other */
+  --bg-light-page-size:600px auto;/* @kind other */
+}
+.bg-dark-page{background:var(--bg-dark-page);background-size:var(--bg-dark-page-size);color:var(--text-on-dark)}
+.bg-light-page{background:var(--bg-light-page);background-size:var(--bg-light-page-size);color:var(--text-body)}

@@ -1,0 +1,7 @@
+/* Webfonts. The printed menu's originals were not supplied as binaries — these are the
+   closest Google Fonts matches and are loaded from the Google Fonts CDN.
+   Oswald            → condensed grotesque used for dish names / section rules (uppercase)
+   Barlow Semi Cond. → bold condensed body copy, prices, variant lines
+   Fredoka           → rounded geometric display used for the big page titles ("Předkrmy")
+   All three ship full Latin-Extended coverage (č, ř, ž, ů, á, é, í, ý). */
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Fredoka:wght@500;600;700&display=swap");

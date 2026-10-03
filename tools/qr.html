@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR kód pro stolek — Menu Asia</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<style>
+  /* This is an internal tool, not part of the customer-facing menu.
+     It borrows the brand tokens so the printed card looks like the restaurant. */
+  body {
+    margin: 0;
+    background: var(--paper-100);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: var(--space-8) var(--space-4) var(--space-16); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-3xl);
+    color: var(--red-600);
+    margin: 0 0 var(--space-2);
+  }
+  .lede { margin: 0 0 var(--space-8); color: var(--text-muted); }
+  label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+  input[type=url], input[type=text] {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 2px solid var(--ink-900);
+    background: var(--paper-000);
+    font: var(--type-body);
+    margin-bottom: var(--space-5);
+  }
+  input:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+  button {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    padding: var(--space-3) var(--space-6);
+    background: var(--yellow-500);
+    color: var(--ink-900);
+    border: 2px solid var(--ink-900);
+    cursor: pointer;
+  }
+  button:hover { background: var(--yellow-400); }
+  button.ghost { background: transparent; }
+
+  /* The table card itself — this is what gets printed. */
+  .card {
+    margin: var(--space-8) 0 var(--space-6);
+    width: 320px;
+    background: var(--ink-900);
+    color: var(--text-on-dark);
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+  }
+  .card__name {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-2xl);
+    color: var(--yellow-400);
+    margin: 0 0 var(--space-1);
+  }
+  .card__kicker {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--gold-300);
+    margin: 0 0 var(--space-6);
+  }
+  .card__qr {
+    background: #fff;
+    padding: var(--space-4);
+    display: inline-block;
+    line-height: 0;
+  }
+  .card__qr img, .card__qr canvas { display: block; width: 220px; height: 220px; }
+  .card__cta {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    margin: var(--space-6) 0 0;
+  }
+  .card__url { font-size: var(--text-xs); color: var(--text-on-dark-muted); margin: var(--space-2) 0 0; word-break: break-all; }
+
+  .note { background: var(--paper-000); border-left: 3px solid var(--yellow-500); padding: var(--space-4); font-size: var(--text-sm); }
+  .err { color: var(--red-600); font-weight: var(--weight-bold); }
+
+  @media print {
+    .no-print { display: none !important; }
+    body { background: #fff; }
+    .wrap { padding: 0; max-width: none; }
+    .card { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="no-print">
+    <h1>QR kód pro stolek</h1>
+    <p class="lede">Vygeneruje kartičku s QR kódem, která vede na digitální menu. Vytiskněte a položte na stůl.</p>
+
+    <label for="url">Adresa menu</label>
+    <input id="url" type="url" placeholder="https://uzivatel.github.io/menu-asia/" value="">
+
+    <label for="name">Název podniku na kartičce</label>
+    <input id="name" type="text" value="Menu Asia">
+
+    <label for="cta">Výzva pod kódem</label>
+    <input id="cta" type="text" value="Naskenujte a prohlédněte si menu">
+
+    <button id="make" type="button">Vygenerovat</button>
+    <button id="print" type="button" class="ghost">Vytisknout</button>
+    <button id="png" type="button" class="ghost">Stáhnout PNG</button>
+
+    <p id="msg" class="err" role="status" aria-live="polite"></p>
+  </div>
+
+  <div class="card" id="card" hidden>
+    <p class="card__name" id="cardName"></p>
+    <p class="card__kicker">Digitální menu</p>
+    <div class="card__qr" id="qr"></div>
+    <p class="card__cta" id="cardCta"></p>
+    <p class="card__url" id="cardUrl"></p>
+  </div>
+
+  <div class="note no-print">
+    <strong>Poznámka:</strong> tento nástroj načítá knihovnu pro QR kód z internetu (cdnjs).
+    Při prvním použití musíte být online. Vygenerovaný QR kód vždy otestujte skutečným
+    telefonem, než kartičky vytisknete.
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  var msg = document.getElementById('msg');
+  var qrBox = document.getElementById('qr');
+  var card = document.getElementById('card');
+
+  function make() {
+    var url = document.getElementById('url').value.trim();
+    msg.textContent = '';
+
+    if (!url) { msg.textContent = 'Zadejte adresu menu.'; return; }
+    if (typeof QRCode === 'undefined') {
+      msg.textContent = 'Knihovnu pro QR kód se nepodařilo načíst — zkontrolujte připojení k internetu.';
+      return;
+    }
+
+    qrBox.textContent = '';
+    new QRCode(qrBox, {
+      text: url,
+      width: 440,          // rendered at 2× the printed size for crisp output
+      height: 440,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    document.getElementById('cardName').textContent = document.getElementById('name').value.trim();
+    document.getElementById('cardCta').textContent = document.getElementById('cta').value.trim();
+    document.getElementById('cardUrl').textContent = url.replace(/^https?:\/\//, '');
+    card.hidden = false;
+  }
+
+  document.getElementById('make').addEventListener('click', make);
+  document.getElementById('print').addEventListener('click', function () {
+    if (card.hidden) { make(); }
+    if (!card.hidden) window.print();
+  });
+
+  document.getElementById('png').addEventListener('click', function () {
+    var canvas = qrBox.querySelector('canvas');
+    if (!canvas) { msg.textContent = 'Nejdřív vygenerujte QR kód.'; return; }
+    var a = document.createElement('a');
+    a.download = 'menu-qr.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  });
+
+  document.getElementById('url').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') make();
+  });
+})();
+</script>
+</body>
+</html>

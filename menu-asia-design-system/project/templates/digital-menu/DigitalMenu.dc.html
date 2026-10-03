@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Digital menu" description="Browse-only restaurant menu: category rail, photo cards, allergen legend." -->
+<helmet><script src="./ds-base.js"></script><style>html{scroll-behavior:smooth}body{margin:0}a{color:var(--red-500)}a:hover{color:var(--red-400)}</style></helmet>
+<div ref="{{ rootRef }}" style="min-height:100vh;background:var(--paper-100);font-family:var(--font-body);color:var(--text-body);padding-bottom:0">
+<header style="background:var(--ink-900);color:var(--text-on-dark);padding:20px 40px 18px;display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+<span style="font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1;color:var(--yellow-400)">Menu Asia</span>
+<span style="font-family:var(--font-heading);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-300)">Vietnamská · thajská · japonská kuchyně</span>
+<span style="margin-left:auto;font-family:var(--font-body);font-weight:600;font-size:15px;color:var(--text-on-dark-muted)">Otevřeno denně 10:30–21:30</span>
+</header>
+<nav style="position:var(--nav-pos,sticky);top:0;z-index:20;background:var(--ink-800);border-top:1px solid var(--border-on-dark);border-bottom:3px solid var(--yellow-500);padding:0 40px;display:flex;gap:28px;overflow-x:auto">
+<a href="#predkrmy" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-000);text-decoration:none;white-space:nowrap" style-hover="color:var(--yellow-500)">Předkrmy</a>
+<a href="#polevky" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-000);text-decoration:none;white-space:nowrap" style-hover="color:var(--yellow-500)">Polévky</a>
+<a href="#nudle" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-000);text-decoration:none;white-space:nowrap" style-hover="color:var(--yellow-500)">Nudle a kari</a>
+<a href="#ryze" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-000);text-decoration:none;white-space:nowrap" style-hover="color:var(--yellow-500)">Rýže</a>
+<a href="#speciality" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper-000);text-decoration:none;white-space:nowrap" style-hover="color:var(--yellow-500)">Speciality</a>
+<a href="#alergeny" style="padding:14px 0;font-family:var(--font-heading);font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-300);text-decoration:none;white-space:nowrap;margin-left:auto" style-hover="color:var(--yellow-500)">Alergeny</a>
+</nav>
+<main style="padding:48px 40px 80px;max-width:1440px;margin:0 auto">
+
+<section id="predkrmy" style="scroll-margin-top:60px;padding-bottom:56px">
+<h2 style="margin:0 0 6px;font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.02;color:var(--red-600)">Předkrmy</h2>
+<p style="margin:0 0 28px;font-family:var(--font-body);font-weight:600;font-size:17px;color:var(--text-muted)">Závitky, krevety a dim sum na začátek.</p>
+<div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,262px),1fr))">
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fresh-roll.png" alt="Fresh Roll 2ks" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">1. Fresh Roll 2ks<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Čerstvé závitky, rýžové nudle, ledový salát, mango, okurka, mrkev, bylinky, chia, sladko-kyselá omáčka.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">70 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">70 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">60 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/spring-rolls.png" alt="Spring Rolls 6ks" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">2. Spring Rolls 6ks<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">1,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Jarní závitky, skleněné nudle, mrkev, zell, kurkuma, relish omáčka - sojová omáčka</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">60 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/nem-ran.png" alt="Nem Ran 3ks" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">3. Nem Ran 3ks<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Zeli, vepřové mleté maso, skleněné nudle, cibule, shiitake, mrkev, sladko-kyselá omáčka</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">70 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/crunchy-shrimps.png" alt="Crunchy Shrimps" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">4. Crunchy Shrimps<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">1,2</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Křupavé krevety, sladká čili omáčka.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>3ks</span><b style="color:var(--price-on-light)">50 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>5ks</span><b style="color:var(--price-on-light)">80 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/cha-gio-de.png" alt="Cha Gio De 3ks" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">5. Cha Gio De 3ks<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">1,2</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Krevety, mrkev, shiitake, taro, cibule, sládké chili omáčka</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">65 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/ha-cao.png" alt="Ha Cao" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">5A. Ha Cao<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">1,2,3,6,7,10,11</sup></h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>3ks</span><b style="color:var(--price-on-light)">60 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>5ks</span><b style="color:var(--price-on-light)">80 kč</b></li>
+</ul>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="polevky" style="scroll-margin-top:60px;padding-bottom:56px">
+<h2 style="margin:0 0 6px;font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.02;color:var(--red-600)">Polévky</h2>
+<p style="margin:0 0 28px;font-family:var(--font-body);font-weight:600;font-size:17px;color:var(--text-muted)">Vývary tažené přes noc, thajské i kokosové.</p>
+<div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,262px),1fr))">
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pho-s-class.png" alt="Pho S Class" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">6. Pho S Class<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Vývar, rýžové nudle, koriandr, jarni cibulka, červené cibule</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">50 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">50 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/tom-yam.png" alt="Tom Yam" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">7. Tom Yam<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">2</sup><span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:8px;background:var(--red-500);color:var(--paper-000);font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;vertical-align:middle">Pikantní</span></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Tom Yam pasta, kokosové mléko, citronová tráva, galangal, houby, cibule, listek z limetky, jarni cibule, koriandr</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">40 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">50 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/spicy-soup.png" alt="Pikantní polévka" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">8. Pikantní polévka</h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Kuře, cibule, mrkev, houby, bambusové výhonky, vejce, paprika, pepř</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">30 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/coconut-drop.png" alt="Coconut Drop" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">9. Coconut Drop<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">2</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Kokosové mléko, citronová tráva, kořeni galangal, houby, kukuřice, koriandr.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">40 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">50 kč</b></li>
+</ul>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="nudle" style="scroll-margin-top:60px;padding-bottom:56px">
+<h2 style="margin:0 0 6px;font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.02;color:var(--red-600)">Nudle a kari</h2>
+<p style="margin:0 0 28px;font-family:var(--font-body);font-weight:600;font-size:17px;color:var(--text-muted)">Bun, pho a smažené nudle. U každého jídla si vyberete maso.</p>
+<div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,262px),1fr))">
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/bun-cha.png" alt="Bun Cha" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">10. Bun Cha<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Vietnamské rýžové nudle, grilované vepřové maso, okurka, sojové kličky, mrkev, ledový salát, kodiandr, sezam, citronová tráva, sladko - kyselá rybí omáčka</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">155 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/bun-nam-bo.png" alt="Bun Nam Bo" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">11. Bun Nam Bo<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Vietnamské rýžové nudle, ledový salát, okurka, sojové kličky, mrkev, kodiandr, arašidy, smažené cibule, ústřicová omáčka, sladko - kyselá rybí omáčka</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">155 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/thai-red-curry.png" alt="Červené thajské kari a rýži" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">12. Červené thajské kari a rýži</h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Červená paprika, cuketa, mrkev, pórek, čínské zelí, cibule, limetka, červená curry pasta, rybí omáčka, cukr, kokosové mléko.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">150 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">190 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s zeleninou</span><b style="color:var(--price-on-light)">110 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krupava kachna</span><b style="color:var(--price-on-light)">220 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pho.png" alt="Pho" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">13. Pho<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Vývar, rýžové nudle, jarni cibulka, kodiandr, červená cibule, chilli, sójové kličky, citron</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovézim masem</span><b style="color:var(--price-on-light)">150 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">115 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s zeleninou</span><b style="color:var(--price-on-light)">110 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pho-tai-lan.png" alt="Pho Tai Lan" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">14. Pho Tai Lan<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Restované hovězí maso, zázvor, hovězí vývar, rýžové nudle, jarnl cibulka, kodiandr, červená cibule, chilli, sójové kličky, citron</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">155 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pho-eye-round.png" alt="Pho with Eye Round Steak" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">15. Pho with Eye Round Steak<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Syrové hovězí maso, hovězí vývar, rýžové nudle, jarní cibulka, kodiandr, červená cibule, chilli, sójové kličky, citron, zázvor</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">160 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/bun-nem.png" alt="Bun Nem" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">16. Bun Nem<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Nem Ran Rolls, rýžové nudle, okurka, sojové kličky, mrkev, ledový salát, kodiandr, sladko - kyselá rybí omáčka</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">125 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pho-xao.png" alt="Pho Xao" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">17. Pho Xao<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">3,4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Smažené rýžové nudle, pak choy, rajčata, červené cibule, lusky, smažené cibule, vejce</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">145 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/japanese-udon.png" alt="Japanese Udon" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">18. Japanese Udon</h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Japanské nudle udon, paprika, lusky, mrkev, žampiony, chili, sezam, smažené cibule, ústřicová omáčka</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">145 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/classy-noodle.png" alt="Classy Noodle" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">19. Classy Noodle<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">3,4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Thajské nudle, vejce, mrkev, paprika, lusky, chilli, ústřicová omáčka</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">145 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/pad-thai.png" alt="Pad Thai" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">20. Pad Thai<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">3,4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Thajské nudle, vejce, mrkev, pórek, sójové kličky, arašidy, chilli, citron, tamarind ústřicová omáčka.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">145 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/bun-xao.png" alt="Bun Xao" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">21. Bun Xao<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">3,4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Smažené rýžové nudle, vejce, pak choy, mrkev, sójové kličky, červná cibule, smažené cibule, rybi omáčka.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">125 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">145 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="ryze" style="scroll-margin-top:60px;padding-bottom:56px">
+<h2 style="margin:0 0 6px;font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.02;color:var(--red-600)">Rýže</h2>
+<p style="margin:0 0 28px;font-family:var(--font-body);font-weight:600;font-size:17px;color:var(--text-muted)">Smažená rýže z rozpálené pánve.</p>
+<div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,262px),1fr))">
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fried-rice-young.png" alt="Smažené rýže s mladá rýže" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">22. Smažené rýže s mladá rýže</h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Smažená rýže, mladé ryže, kokos, lusky, kukuřice, vejce, porek, mrkev</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">150 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">125 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fried-rice.png" alt="Smažené rýže" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">23. Smažené rýže<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">2,3,4,6</sup></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Smažená rýže, cuketa, sójové klíčky, smažená cibule, ananas, paprika, vejce, kurkuma, červená cibule, ústřicová omáčka.</p>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">150 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">155 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s tofu</span><b style="color:var(--price-on-light)">125 kč</b></li>
+</ul>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="speciality" style="scroll-margin-top:60px;padding-bottom:56px">
+<h2 style="margin:0 0 6px;font-family:var(--font-display);font-weight:600;font-size:64px;line-height:1.02;color:var(--red-600)">Speciality</h2>
+<p style="margin:0 0 28px;font-family:var(--font-body);font-weight:600;font-size:17px;color:var(--text-muted)">Wok, kachna a křupavá klasika s rýží nebo hranolky.</p>
+<div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(var(--card-min,262px),1fr))">
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/chicken-lemongrass.png" alt="Chicken & Lemongrass, Chilli" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">25. Chicken &amp; Lemongrass, Chilli<span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:8px;background:var(--red-500);color:var(--paper-000);font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;vertical-align:middle">Pikantní</span></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Kuřecí maso, červená paprika, citronová tráva, chilli, ústřicová omáčka, česnek</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">135 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/tofu-vegetables.png" alt="Tofu & Vegetables" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">26. Tofu &amp; Vegetables<span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:8px;background:var(--sage-600);color:var(--paper-000);font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;vertical-align:middle">Vege</span></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Tofu, mrkev, červené cibule, lusky, sójové kličky, pakchoy, cuketa</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">130 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/go-veggie.png" alt="Go Veggie" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">28. Go Veggie<sup style="font-family:var(--font-body);font-weight:600;font-size:11px;margin-left:4px">1,11</sup><span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;margin-left:8px;background:var(--sage-600);color:var(--paper-000);font-family:var(--font-body);font-weight:600;font-size:11px;letter-spacing:.02em;vertical-align:middle">Vege</span></h3>
+<p style="margin:0;font-family:var(--font-body);font-weight:600;font-size:15px;line-height:1.38;color:var(--text-muted)">Japonské nudle udon, mrkev, mořské řasy, žampiony, shiitake, sezam, lusky, smažená cibule</p>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">130 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fried-cheese.png" alt="Smažený sýr s hranolkami" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">29. Smažený sýr s hranolkami</h3>
+<div style="margin:auto 0 0;padding:10px 0 0;border-top:1px solid var(--border-on-light)"><b style="font-family:var(--font-body);font-weight:700;font-size:22px;line-height:1;color:var(--price-on-light)">125 kč</b></div>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fried-chicken-pieces.png" alt="Smažený kurecí kousky" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">30. Smažený kurecí kousky</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hranolky a omáčka</span><b style="color:var(--price-on-light)">120 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s smažené nudle</span><b style="color:var(--price-on-light)">120 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s rýží a omáčkou</span><b style="color:var(--price-on-light)">120 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/kung-pao.png" alt="Kung Pao s rýži" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">31. Kung Pao s rýži</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">140 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/fried-noodles.png" alt="Smažené nudle" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">32. Smažené nudle</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s kuřecím masem</span><b style="color:var(--price-on-light)">110 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hovězím masem</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s krevetami</span><b style="color:var(--price-on-light)">150 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>se zeleninou</span><b style="color:var(--price-on-light)">100 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/crispy-duck.png" alt="Křupavá kachna" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">33. Křupavá kachna</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s smažená rýže</span><b style="color:var(--price-on-light)">210 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s omáčkou a rýží</span><b style="color:var(--price-on-light)">190 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s rýží a zeleninou</span><b style="color:var(--price-on-light)">210 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s smažené nudle</span><b style="color:var(--price-on-light)">210 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hranolky</span><b style="color:var(--price-on-light)">190 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/crispy-chicken-breast.png" alt="Křupavé smažené kuřecí prso" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">34. Křupavé smažené kuřecí prso</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s omáčkou a rýží</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>smažené nudle</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hranolky</span><b style="color:var(--price-on-light)">130 kč</b></li>
+</ul>
+</div>
+</article>
+
+<article style="background:var(--paper-000);border:1px solid var(--border-on-light);display:flex;flex-direction:column" style-hover="border-color:var(--ink-900)">
+<div style="background:var(--paper-100);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:14px"><img src="../../assets/dishes/crispy-chicken-thigh.png" alt="Krupavé kuřecí stehno" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(40,36,30,.28))"></div>
+<div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px;flex:1">
+<h3 style="margin:0;font-family:var(--font-heading);font-weight:700;font-size:19px;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--text-strong)">35. Krupavé kuřecí stehno</h3>
+<ul style="list-style:none;margin:auto 0 0;padding:10px 0 0;display:grid;gap:3px;border-top:1px solid var(--border-on-light);font-family:var(--font-body);font-weight:600;font-size:15px">
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s omáčkou a rýžl</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s smažené nudle</span><b style="color:var(--price-on-light)">130 kč</b></li>
+<li style="display:flex;justify-content:space-between;gap:12px"><span>s hranolky</span><b style="color:var(--price-on-light)">130 kč</b></li>
+</ul>
+</div>
+</article>
+
+</div>
+</section>
+
+<sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
+<section id="alergeny" style="scroll-margin-top:60px;background:var(--ink-900);color:var(--text-on-dark);padding:40px 36px 44px">
+<h2 style="margin:0 0 4px;font-family:var(--font-heading);font-weight:700;font-size:32px;letter-spacing:.02em;text-transform:uppercase;color:var(--yellow-400)">Seznam alergenů</h2>
+<p style="margin:0 0 26px;font-family:var(--font-body);font-weight:600;font-size:15px;font-style:italic;color:var(--text-on-dark-muted)">Čísla u názvů jídel odpovídají směrnici 1169/2011 EU.</p>
+<div style="display:grid;gap:12px 32px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))">
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">1</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Obiloviny obsahující lepek</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">2</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Korýši a výrobky z nich</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">3</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Vejce a výrobky z nich</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">4</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Ryby a výrobky z nich</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">5</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Podzemnice olejná (arašídy)</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">6</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Sójové boby (sója)</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">7</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Mléko a výrobky z něj</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">8</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Skořápkové plody</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">9</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Celer a výrobky z něj</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">10</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Hořčice a výrobky z ní</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">11</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Sezamová semena (sezam)</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">12</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Oxid siřičitý a siřičitany</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">13</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Vlčí bob (lupina)</span></div>
+<div style="display:flex;gap:14px;align-items:baseline"><span style="flex:none;width:28px;height:28px;border:2px solid var(--yellow-500);border-radius:999px;color:var(--yellow-500);display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-body);font-weight:700;font-size:13px">14</span><span style="font-family:var(--font-body);font-weight:600;font-size:16px">Měkkýši a výrobky z nich</span></div>
+</div>
+</section>
+</sc-if>
+
+</main>
+<footer style="background:var(--ink-800);color:var(--text-on-dark-muted);padding:28px 40px;display:flex;gap:24px;flex-wrap:wrap;font-family:var(--font-body);font-weight:600;font-size:15px">
+<span>Menu Asia · Vodičkova 12, Praha 1</span>
+<span>+420 777 123 456</span>
+<span style="margin-left:auto">Ceny jsou uvedeny v Kč včetně DPH.</span>
+</footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;cardMinWidth&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:262,&quot;min&quot;:220,&quot;max&quot;:400,&quot;step&quot;:2,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;stickyNav&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showAllergenLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
+  applyVars() {
+    const el = this.rootRef.current;
+    if (!el) return;
+    el.style.setProperty('--card-min', (this.props.cardMinWidth ?? 262) + 'px');
+    el.style.setProperty('--nav-pos', this.props.stickyNav === false ? 'static' : 'sticky');
+  }
+  componentDidMount() { this.applyVars(); }
+  componentDidUpdate() { this.applyVars(); }
+  renderVals() {
+    return {
+      rootRef: this.rootRef,
+      showLegend: this.props.showAllergenLegend !== false
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="description" content="Jídelní lístek — vietnamská, thajská a japonská kuchyně. Ceny, popisy a alergeny.">
+<title>Menu</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#obsah">Přeskočit na menu</a>
+
+<header class="site-header">
+  <span class="site-header__name"></span>
+  <span class="site-header__tagline"></span>
+  <span class="site-header__hours"></span>
+</header>
+
+<!-- Shown on a category page, hidden on the index. -->
+<div class="bar" hidden>
+  <a class="bar__back" href="#/"></a>
+  <nav class="bar__nav" aria-label="Kategorie jídel"></nav>
+</div>
+
+<main class="main" id="obsah">
+
+  <!-- The landing screen: one card per category. -->
+  <nav class="index" aria-label="Kategorie jídel"></nav>
+
+  <!-- Category sections are inserted here from data/menu.json -->
+
+  <section class="allergens" id="alergeny" hidden>
+    <h2 class="allergens__title"></h2>
+    <p class="allergens__note"></p>
+    <div class="allergens__grid"></div>
+  </section>
+</main>
+
+<footer class="site-footer"></footer>
+
+<button class="to-top" type="button" aria-label="Zpět nahoru"></button>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

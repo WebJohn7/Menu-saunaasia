@@ -1,0 +1,41 @@
+window.MENU_DATA = {
+  courses: ['Předkrmy','Polévky','Nudle','Rýže','Speciality'],
+  dishes: [
+    { id:1, course:'Předkrmy', number:1, name:'Fresh Roll 2ks', allergens:[4], ground:'dark', photo:'../../assets/dishes/fresh-roll.png',
+      description:'Čerstvé závitky, rýžové nudle, ledový salát, mango, okurka, mrkev, bylinky, chia, sladko-kyselá omáčka.',
+      variants:[{label:'s krevetami',price:70},{label:'s hovězím masem',price:70},{label:'s tofu',price:60}] },
+    { id:2, course:'Předkrmy', number:2, name:'Spring Rolls 6ks', allergens:[1,6], ground:'dark', price:60,
+      description:'Jarní závitky, skleněné nudle, mrkev, zell, kurkuma, relish omáčka - sojová omáčka' },
+    { id:3, course:'Polévky', number:6, name:'Pho S Class', allergens:[4,6], ground:'light', photo:'../../assets/dishes/pho.png',
+      description:'Vývar, rýžové nudle, koriandr, jarni cibulka, červené cibule',
+      variants:[{label:'s hovězím masem',price:50},{label:'s kuřecím masem',price:50}] },
+    { id:4, course:'Polévky', number:8, name:'Pikantní polévka', allergens:[], ground:'light', price:30, spicy:true,
+      description:'Kuře, cibule, mrkev, houby, bambusové výhonky, vejce, paprika, pepř' },
+    { id:5, course:'Nudle', number:17, name:'Pho Xao', allergens:[3,4,6], ground:'light', photo:'../../assets/dishes/pho-xao.png',
+      description:'Smažené rýžové nudle, pak choy, rajčata, červené cibule, lusky, smažené cibule, vejce',
+      variants:[{label:'s kuřecím masem',price:125},{label:'s hovězím masem',price:145},{label:'s krevetami',price:155},{label:'s tofu',price:120}] },
+    { id:6, course:'Nudle', number:18, name:'Japanese Udon', allergens:[], ground:'light', photo:'../../assets/dishes/japanese-udon.png',
+      description:'Japanské nudle udon, paprika, lusky, mrkev, žampiony, chili, sezam, smažené cibule, ústřicová omáčka',
+      variants:[{label:'s kuřecím masem',price:125},{label:'s hovězím masem',price:145},{label:'s krevetami',price:155},{label:'s tofu',price:120}] },
+    { id:7, course:'Nudle', number:20, name:'Pad Thai', allergens:[3,4,6], ground:'light', photo:'../../assets/dishes/pad-thai.png',
+      description:'Thajské nudle, vejce, mrkev, pórek, sójové klíčky, arašidy, chilli, citron, tamarind ústřicová omáčka.',
+      variants:[{label:'s kuřecím masem',price:125},{label:'s hovězím masem',price:145},{label:'s krevetami',price:155},{label:'s tofu',price:120}] },
+    { id:8, course:'Rýže', number:22, name:'Smažené rýže s mladá rýže', allergens:[], ground:'dark', photo:'../../assets/dishes/fried-rice.png',
+      description:'Smažená rýže, mladé ryže, kokos, lusky, kukuřice, vejce, porek, mrkev',
+      variants:[{label:'s kuřecím masem',price:130},{label:'s hovězím masem',price:150},{label:'s krevetami',price:155},{label:'s tofu',price:125}] },
+    { id:9, course:'Speciality', number:25, name:'Chicken & Lemongrass, Chilli', allergens:[], ground:'dark', price:135, spicy:true, photo:'../../assets/dishes/chicken-lemongrass.png',
+      description:'Kuřecí maso, červená paprika, citronová tráva, chilli, ústřicová omáčka, česnek' },
+    { id:10, course:'Speciality', number:34, name:'Křupavé smažené kuřecí prso', allergens:[], ground:'dark', photo:'../../assets/dishes/crispy-chicken.png',
+      description:'Podáváno s omáčkou dle výběru',
+      variants:[{label:'s omáčkou a rýží',price:130},{label:'smažené nudle',price:130},{label:'s hranolky',price:130}] }
+  ],
+  allergens: [
+    [1,'Obiloviny obsahující lepek','Pšenice, žito, ječmen, oves, špalda, kamut'],
+    [2,'Korýši','a výrobky z nich'],[3,'Vejce','a výrobky z nich'],[4,'Ryby','a výrobky z nich'],
+    [5,'Podzemnice olejná (arašídy)','a výrobky z ní'],[6,'Sójové boby (sója)','a výrobky z nich'],
+    [7,'Mléko','a výrobky z něj'],[8,'Skořápkové plody','Mandle, lískové ořechy, vlašské ořechy, kešu'],
+    [9,'Celer','a výrobky z něj'],[10,'Hořčice','a výrobky z ní'],[11,'Sezamová semena (sezam)','a výrobky z nich'],
+    [12,'Oxid siřičitý a siřičitany','v koncentracích vyšších než 10 mg/kg'],
+    [13,'Vlčí bob (lupina)','a výrobky z něj'],[14,'Měkkýši','a výrobky z nich']
+  ]
+};

@@ -1,0 +1,37 @@
+<!-- @dsCard group="Digital menu" viewport="1280x900" name="Digital menu" subtitle="Course browsing, dish dialog, cart, allergen sheet" -->
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><title>Menu Asia — digitální menu</title>
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>body{margin:0;background:var(--ink-900)}a{color:var(--red-500)}a:hover{color:var(--red-400)}#toast{position:fixed;left:0;right:0;bottom:0;z-index:60}</style>
+</head><body>
+<div id="root"></div>
+<script type="text/babel" src="MenuScreen.jsx"></script>
+<script type="text/babel" src="DishDialog.jsx"></script>
+<script type="text/babel" src="CartScreen.jsx"></script>
+<script type="text/babel" src="AllergenScreen.jsx"></script>
+<script type="text/babel">
+const { Toast, Button } = window.MenuAsiaDesignSystem_345094;
+function App(){
+  const [screen,setScreen]=React.useState('menu');
+  const [course,setCourse]=React.useState('Předkrmy');
+  const [dish,setDish]=React.useState(null);
+  const [cart,setCart]=React.useState([]);
+  const [toast,setToast]=React.useState(null);
+  const add=(d,variant,price)=>{setCart(c=>[...c,{name:d.name,variant,price}]);setDish(null);setToast(d.name+' přidáno do košíku');setTimeout(()=>setToast(null),2600);};
+  return <>
+    {screen==='menu' && <MenuScreen course={course} setCourse={setCourse} cartCount={cart.length}
+      onCart={()=>setScreen('cart')} onOpen={{dish:setDish,allergens:()=>setScreen('allergens')}} />}
+    {screen==='cart' && <CartScreen items={cart} onBack={()=>setScreen('menu')}
+      onRemove={i=>setCart(c=>c.filter((_,j)=>j!==i))}
+      onSubmit={()=>{setCart([]);setScreen('menu');setToast('Objednávka odeslána. Díky!');setTimeout(()=>setToast(null),2600);}} />}
+    {screen==='allergens' && <AllergenScreen onBack={()=>setScreen('menu')} />}
+    <DishDialog dish={dish} onClose={()=>setDish(null)} onAdd={add} />
+    {toast && <div id="toast"><Toast tone="success" message={toast} action={<Button variant="ghost" size="sm" style={{color:'var(--yellow-500)'}} onClick={()=>setToast(null)}>OK</Button>} /></div>}
+  </>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script></body></html>

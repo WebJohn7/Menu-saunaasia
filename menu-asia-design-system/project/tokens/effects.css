@@ -1,0 +1,29 @@
+:root{
+  /* Corners: the printed menu is square. Radius only appears on plates (circles)
+     and on digital-only affordances (buttons, chips). */
+  --radius-none:0;--radius-sm:2px;--radius-md:6px;--radius-lg:12px;--radius-pill:999px;--radius-circle:50%;
+
+  /* Shadows: photography is cut out and dropped onto the page, so the only real
+     shadow in the system is the one under a plate. */
+  --shadow-plate:0 22px 34px -18px rgba(0,0,0,.75);
+  --shadow-plate-light:0 18px 28px -16px rgba(40,36,30,.38);
+  --shadow-card:0 2px 0 rgba(10,10,10,.06);
+  --shadow-raised:0 10px 24px -12px rgba(0,0,0,.5);
+  --shadow-inset-top:inset 0 1px 0 rgba(255,255,255,.06);
+
+  /* Borders */
+  --border-hairline:1px solid var(--border-on-light);/* @kind other */
+  --border-hairline-dark:1px solid var(--border-on-dark);/* @kind other */
+  --rule-heavy:3px solid currentColor;/* @kind other */
+
+  /* Motion */
+  --duration-fast:120ms;/* @kind other */--duration-base:200ms;/* @kind other */--duration-slow:320ms;/* @kind other */
+  --ease-out:cubic-bezier(.2,.7,.3,1);/* @kind other */
+  --ease-in-out:cubic-bezier(.5,0,.2,1);/* @kind other */
+  --transition-base:all var(--duration-base) var(--ease-out);/* @kind other */
+
+  /* Overlay / blur */
+  --blur-overlay:blur(6px);/* @kind other */
+  --scrim-dark:linear-gradient(180deg,rgba(10,10,10,0) 0%,rgba(10,10,10,.85) 72%);/* @kind color */
+  --scrim-light:linear-gradient(180deg,rgba(245,244,241,0) 0%,rgba(245,244,241,.92) 70%);/* @kind color */
+}

@@ -1,0 +1,24 @@
+:root{
+  --font-display:"Fredoka","Trebuchet MS",sans-serif;
+  --font-heading:"Oswald","Arial Narrow",sans-serif;
+  --font-body:"Barlow Semi Condensed","Arial Narrow",sans-serif;
+
+  --text-2xs:12px;--text-xs:13px;--text-sm:15px;--text-base:17px;--text-lg:20px;
+  --text-xl:24px;--text-2xl:30px;--text-3xl:38px;--text-4xl:52px;--text-5xl:72px;--text-6xl:104px;
+
+  --weight-regular:400;/* @kind other */--weight-medium:500;/* @kind other */--weight-semibold:600;/* @kind other */--weight-bold:700;/* @kind other */
+
+  --leading-tight:1.02;/* @kind other */--leading-snug:1.18;/* @kind other */--leading-normal:1.38;/* @kind other */--leading-loose:1.55;/* @kind other */
+
+  --tracking-tight:-0.01em;/* @kind other */--tracking-normal:0;/* @kind other */--tracking-caps:0.02em;/* @kind other */--tracking-wide:0.06em;/* @kind other */
+
+  /* Semantic roles */
+  --type-page-title:var(--weight-semibold) var(--text-6xl)/var(--leading-tight) var(--font-display);
+  --type-section:var(--weight-bold) var(--text-3xl)/var(--leading-snug) var(--font-heading);
+  --type-dish:var(--weight-bold) var(--text-2xl)/var(--leading-snug) var(--font-heading);
+  --type-dish-sm:var(--weight-bold) var(--text-lg)/var(--leading-snug) var(--font-heading);
+  --type-price:var(--weight-bold) var(--text-xl)/1 var(--font-body);
+  --type-body:var(--weight-semibold) var(--text-base)/var(--leading-normal) var(--font-body);
+  --type-variant:var(--weight-semibold) var(--text-sm)/var(--leading-normal) var(--font-body);
+  --type-label:var(--weight-semibold) var(--text-xs)/1.2 var(--font-body);
+}

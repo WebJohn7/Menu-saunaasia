@@ -1,0 +1,24 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Feedback" subtitle="Dialog and Toast" -->
+<!doctype html><html lang="cs"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{margin:0;padding:20px;font-family:var(--font-body);background:var(--paper-000);color:var(--text-body)}.row{display:flex;flex-wrap:wrap;align-items:center;gap:14px}.stack{display:grid;gap:14px}.lbl{font-family:var(--font-heading);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.55}</style></head><body style="background:var(--paper-100)"><div id="root"></div>
+<script type="text/babel">
+const { Dialog, Toast, Button } = window.MenuAsiaDesignSystem_345094;
+function Demo(){const[open,setOpen]=React.useState(false);
+return <div className="stack" style={{gap:18}}>
+<div className="row"><Button variant="dark" onClick={()=>setOpen(true)}>Otevřít dialog</Button></div>
+<Toast tone="success" message="Pho přidáno do košíku" action={<Button variant="ghost" size="sm" style={{color:'var(--yellow-500)'}}>Zpět</Button>}/>
+<Toast tone="danger" message="Položka je dnes vyprodaná"/>
+<div style={{position:'relative',minHeight:140,border:'1px dashed var(--border-on-light)'}}>
+<div style={{position:'absolute',inset:0,background:'var(--surface-overlay)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+<div style={{width:360,background:'var(--paper-000)',borderTop:'3px solid var(--yellow-500)',boxShadow:'var(--shadow-raised)'}}>
+<h3 style={{margin:0,padding:'14px 20px',fontFamily:'var(--font-heading)',fontSize:'var(--text-lg)',letterSpacing:'.02em',textTransform:'uppercase',borderBottom:'1px solid var(--border-on-light)'}}>Alergeny</h3>
+<div style={{padding:'16px 20px',font:'var(--type-body)'}}>1 lepek · 2 korýši · 6 sója</div></div></div></div>
+<Dialog open={open} title="Alergeny" onClose={()=>setOpen(false)} footer={<Button size="sm" onClick={()=>setOpen(false)}>Rozumím</Button>}>Obsahuje: 1 lepek, 2 korýši, 6 sója.</Dialog>
+</div>;}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>
