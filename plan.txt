@@ -504,3 +504,9 @@ CHANGES AFTER THE FIRST REVIEW
   Data-only change, same pattern as ui.vatNote: renderBrand already does
   `if (r.hours) ... else hours.remove()`, so the empty span is dropped from the DOM.
   The .site-header__hours CSS and the guard stay; putting the key back restores it.
+
+2026-10-03 — Deploy started (for the QR code)
+  git init on branch main, first commit f18dabd (whole folder, plus .nojekyll so
+  Pages serves files as-is). Waiting on: the user creates the GitHub repo (no gh CLI
+  on this machine), then push, enable Pages (main / root), then generate the QR in
+  tools/qr.html against https://webjohn7.github.io/<repo>/ and scan it with a phone.
